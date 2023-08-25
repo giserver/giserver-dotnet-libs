@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <ServerGarbageCollection>false</ServerGarbageCollection>
+    <InvariantGlobalization>true</InvariantGlobalization>
+
+	<TieredPGO>true</TieredPGO>
+	<PublishSelfContained>true</PublishSelfContained>
+	<!--<PublishTrimmed>true</PublishTrimmed>
+	<TrimMode>partial</TrimMode>-->
+	<StripSymbols>true</StripSymbols>
+	<PublishSingleFile>true</PublishSingleFile>
+	<IncludeNativeLibrariesForSelfExtract>true</IncludeNativeLibrariesForSelfExtract>
+	<IncludeAllContentForSelfExtract>true</IncludeAllContentForSelfExtract>
+	<EnableCompressionInSingleFile>true</EnableCompressionInSingleFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Remove="appsettings.dev.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="appsettings.dev.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NetTopologySuite.Swagger" Version="1.0.0" Condition="'$(Configuration)' == 'DEBUG'" />
+    <PackageReference Include="Npgisql.GeoMarker" Version="1.0.0" />
+    <PackageReference Include="Npgisql.GeoQuery" Version="1.0.4" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+</Project>
