@@ -8,7 +8,7 @@ using Giserver.Mark.EFCore.Extensions;
 using Giserver.GeoQuery.Extensions;
 using Giserver.NetTopologySuite.Serialize;
 
-var builder = WebApplication.CreateSlimBuilder(args);
+var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 var isDev = builder.Environment.IsDevelopment();
