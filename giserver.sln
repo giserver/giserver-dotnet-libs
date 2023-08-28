@@ -5,7 +5,7 @@ VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Giserver", "src\Giserver\Giserver.csproj", "{7F5ADC81-C5F7-4B8A-8135-65C7F896D853}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Libs", "Libs", "{BF7B1805-A57C-4F1D-9D22-7861EF80637E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{BF7B1805-A57C-4F1D-9D22-7861EF80637E}"
 	ProjectSection(SolutionItems) = preProject
 		libs\Directory.Build.props = libs\Directory.Build.props
 	EndProjectSection
@@ -23,9 +23,12 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Giserver.NetTopologySuite.Swagger.Swashbuckle", "libs\Giserver.NetTopologySuite.Swagger.Swashbuckle\Giserver.NetTopologySuite.Swagger.Swashbuckle.csproj", "{D32BE05A-3366-4CFC-9FFA-B0D1DF1C4D43}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{046DB5BC-2D16-4AFB-BE8A-E9A417CA434C}"
-	ProjectSection(SolutionItems) = preProject
-		.github\workflows\publish-to-nuget.yml = .github\workflows\publish-to-nuget.yml
-	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{463D8BDD-641E-43EF-9D9E-C048E42E4F1D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{1E9A881C-B3EE-4308-9265-DCF6BE05504C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "simples", "simples", "{15DC4E81-C2DE-4955-8DEB-7006B1F39429}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -66,6 +69,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{7F5ADC81-C5F7-4B8A-8135-65C7F896D853} = {463D8BDD-641E-43EF-9D9E-C048E42E4F1D}
 		{94C0A37A-6ED0-4B0A-B2FA-C528F3193A48} = {BF7B1805-A57C-4F1D-9D22-7861EF80637E}
 		{645AD8BA-C033-4249-9AF0-F36DA5A799C1} = {BF7B1805-A57C-4F1D-9D22-7861EF80637E}
 		{526A2B7F-35FB-4955-BE14-8C2C987A105D} = {BF7B1805-A57C-4F1D-9D22-7861EF80637E}

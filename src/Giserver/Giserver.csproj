@@ -30,10 +30,4 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\libs\Giserver.GeoQuery\Giserver.GeoQuery.csproj" />
-    <ProjectReference Include="..\..\libs\Giserver.Mark.EFCore\Giserver.Mark.EFCore.csproj" />
-    <ProjectReference Include="..\..\libs\Giserver.NetTopologySuite.Swagger.Swashbuckle\Giserver.NetTopologySuite.Swagger.Swashbuckle.csproj" />
-  </ItemGroup>
-
 </Project>
