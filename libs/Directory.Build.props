@@ -1,0 +1,25 @@
+<Project>
+	<PropertyGroup>
+
+		<Version>1.0.0-beta</Version>
+
+		<TargetFrameworks>net6.0;net7.0</TargetFrameworks>
+		<LangVersion>latest</LangVersion>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<GenerateDocumentationFile>true</GenerateDocumentationFile>
+
+		<Authors>CocaineCoder</Authors>
+		<RepositoryType>git</RepositoryType>
+		<RepositoryUrl>https://github.com/giserver/giserver.git</RepositoryUrl>
+		<PublishRepositoryUrl>true</PublishRepositoryUrl>
+		<PackageLicenseExpression>MIT</PackageLicenseExpression>
+		<AccelerateBuildsInVisualStudio>true</AccelerateBuildsInVisualStudio>
+	</PropertyGroup>
+
+	<PropertyGroup>
+		<NoWarn>1701;1702;1591</NoWarn>
+	</PropertyGroup>
+</Project>

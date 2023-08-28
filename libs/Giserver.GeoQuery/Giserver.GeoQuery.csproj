@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<PackageIcon>logo.png</PackageIcon>
+		<Title>npgsql in mvt/geopbf/geojson query</Title>
+		<PackageTags>npgsql;postgis;extensions;mvt;mapbox vector tile;geojson;geobuf</PackageTags>
+		<Description>
+			use postgis sql to query data as mvt/geopbf/geojson format.
+			you can use app.UseGeoQuery() to make webapi or use interface IGeoQuery.
+			more information please read README.md.
+		</Description>
+	</PropertyGroup>
+	
+	<ItemGroup>
+		<FrameworkReference Include="Microsoft.AspNetCore.App" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<PackageReference Include="Npgsql" Version="7.0.2" />
+	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Include="..\logo.png">
+	    <Pack>True</Pack>
+	    <PackagePath>\</PackagePath>
+	  </None>
+	</ItemGroup>
+</Project>

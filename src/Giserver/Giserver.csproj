@@ -27,10 +27,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="NetTopologySuite.Swagger" Version="1.0.0" Condition="'$(Configuration)' == 'DEBUG'" />
-    <PackageReference Include="Npgisql.GeoMarker" Version="1.0.0" />
-    <PackageReference Include="Npgisql.GeoQuery" Version="1.0.4" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\libs\Giserver.GeoQuery\Giserver.GeoQuery.csproj" />
+    <ProjectReference Include="..\..\libs\Giserver.Mark.EFCore\Giserver.Mark.EFCore.csproj" />
+    <ProjectReference Include="..\..\libs\Giserver.NetTopologySuite.Swagger.Swashbuckle\Giserver.NetTopologySuite.Swagger.Swashbuckle.csproj" />
   </ItemGroup>
 
 </Project>

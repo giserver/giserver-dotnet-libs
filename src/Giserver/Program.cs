@@ -1,11 +1,12 @@
 #if DEBUG
 
-using NetTopologySuite.Swagger;
+using Giserver.NetTopologySuite.Swagger.Swashbuckle;
 
 #endif
 
-using Npgsql.GeoMarker.Extensions;
-using Npgsql.GeoQuery.Extensions;
+using Giserver.Mark.EFCore.Extensions;
+using Giserver.GeoQuery.Extensions;
+using Giserver.NetTopologySuite.Serialize;
 
 var builder = WebApplication.CreateSlimBuilder(args);
 var services = builder.Services;
