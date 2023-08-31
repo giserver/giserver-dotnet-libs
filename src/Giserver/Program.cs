@@ -1,14 +1,9 @@
-#if DEBUG
-
-using Giserver.NetTopologySuite.Swagger.Swashbuckle;
-
-#endif
-
 using Giserver.Mark.EFCore.Extensions;
 using Giserver.GeoQuery.Extensions;
 using Giserver.NetTopologySuite.Serialize;
+using Giserver.NetTopologySuite.Swagger.Swashbuckle;
 
-var builder = WebApplication.CreateBuilder(args);
+var builder = WebApplication.CreateSlimBuilder(args);
 var services = builder.Services;
 var configuration = builder.Configuration;
 var isDev = builder.Environment.IsDevelopment();
@@ -16,23 +11,28 @@ var isDev = builder.Environment.IsDevelopment();
 configuration.AddJsonFile(isDev ? "appsettings.dev.json" : "appsettings.json");
 
 services.AddGeoMarker(configuration.GetConnectionString("geo_marker")!);
-services.AddGeoQuery();
+services.AddGeoQuery(options =>
+{
+    options.ConnectionString = configuration.GetConnectionString("geo_query")!;
+});
 
 services.AddEndpointsApiExplorer();
 
-#if DEBUG
-services.AddSwaggerGen(o =>
+if (isDev)
 {
-    o.AddGeometry(GeoSerializeType.Geojson);
-});
-#endif
+    services.AddSwaggerGen(o =>
+    {
+        o.AddGeometry(GeoSerializeType.Geojson);
+    });
+}
 
 var app = builder.Build();
 
-#if DEBUG
-app.UseSwagger();
-app.UseSwaggerUI();
-#endif
+if (isDev)
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
 
 app.UseGeoMarker(options =>
 {
@@ -41,7 +41,7 @@ app.UseGeoMarker(options =>
         b.WithTags("geo_marker");
     };
 });
-app.UseGeoQuery(configuration.GetConnectionString("geo_query")!, b =>
+app.UseGeoQuery(b =>
 {
     b.GeobufRouteHandlerOption.RouteHandlerBuilderAction = x => x.WithTags("geo_query");
     b.GeoJsonRouteHandlerOption.RouteHandlerBuilderAction = x => x.WithTags("geo_query");

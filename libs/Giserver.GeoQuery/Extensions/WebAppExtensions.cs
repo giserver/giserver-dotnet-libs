@@ -8,23 +8,23 @@ public abstract class GeoQueryRouteHandlerOption
 
     public abstract string GetRoutePatter(string prefix, bool isConnectionStringTemplate);
 
-    public abstract Delegate GetRouteDelegate(string connectionString, bool isConnectionStringTemplate);
+    public abstract Delegate GetRouteDelegate(bool isConnectionStringTemplate);
 }
 
 public class MVTRouteHandlerOption : GeoQueryRouteHandlerOption
 {
-    public override Delegate GetRouteDelegate(string connectionString, bool isConnectionStringTemplate)
+    public override Delegate GetRouteDelegate(bool isConnectionStringTemplate)
     {
         return isConnectionStringTemplate ?
-            async ([FromServices] IGeoQuery geoQuery, string database, string table, string geomColumn, int z, int x, int y, string? schema, string? columns, string? filter, bool? centroid) =>
+            async ([FromServices] IOptions<GeoQueryOptions> options, [FromServices] IGeoQuery geoQuery, string database, string table, string geomColumn, int z, int x, int y, string? schema, string? columns, string? filter, bool? centroid) =>
             {
-                var bytes = await geoQuery.GetMvtBufferAsync(connectionString.Format(database), table, geomColumn, z, x, y, schema ?? "public", columns.SpliteByComma(), filter, centroid ?? false);
+                var bytes = await geoQuery.GetMvtBufferAsync(options.Value.ConnectionString.Format(database), table, geomColumn, z, x, y, schema ?? "public", columns.SpliteByComma(), filter, centroid ?? false);
                 return Results.Bytes(bytes, "application/x-protobuf");
             }
         :
-            async ([FromServices] IGeoQuery geoQuery, string table, string geomColumn, int z, int x, int y, string? schema, string? columns, string? filter, bool? centroid) =>
+            async ([FromServices] IOptions<GeoQueryOptions> options, [FromServices] IGeoQuery geoQuery, string table, string geomColumn, int z, int x, int y, string? schema, string? columns, string? filter, bool? centroid) =>
             {
-                var bytes = await geoQuery.GetMvtBufferAsync(connectionString, table, geomColumn, z, x, y, schema ?? "public", columns.SpliteByComma(), filter, centroid ?? false);
+                var bytes = await geoQuery.GetMvtBufferAsync(options.Value.ConnectionString, table, geomColumn, z, x, y, schema ?? "public", columns.SpliteByComma(), filter, centroid ?? false);
                 return Results.Bytes(bytes, "application/x-protobuf");
             };
     }
@@ -37,18 +37,18 @@ public class MVTRouteHandlerOption : GeoQueryRouteHandlerOption
 
 public class GeobufRouteHandlerOption : GeoQueryRouteHandlerOption
 {
-    public override Delegate GetRouteDelegate(string connectionString, bool isConnectionStringTemplate)
+    public override Delegate GetRouteDelegate(bool isConnectionStringTemplate)
     {
         return isConnectionStringTemplate ?
-            async ([FromServices] IGeoQuery geoQuery, string database, string table, string geomColumn, string? schema, string? columns, string? filter, bool? centroid) =>
+            async ([FromServices] IOptions<GeoQueryOptions> options, [FromServices] IGeoQuery geoQuery, string database, string table, string geomColumn, string? schema, string? columns, string? filter, bool? centroid) =>
             {
-                var bytes = await geoQuery.GetGeoBufferAsync(connectionString.Format(database), table, geomColumn, schema ?? "public", columns.SpliteByComma(), filter, centroid ?? false);
+                var bytes = await geoQuery.GetGeoBufferAsync(options.Value.ConnectionString.Format(database), table, geomColumn, schema ?? "public", columns.SpliteByComma(), filter, centroid ?? false);
                 return Results.Bytes(bytes, "application/x-protobuf");
             }
         :
-            async ([FromServices] IGeoQuery geoQuery, string table, string geomColumn, string? schema, string? columns, string? filter, bool? centroid) =>
+            async ([FromServices] IOptions<GeoQueryOptions> options, [FromServices] IGeoQuery geoQuery, string table, string geomColumn, string? schema, string? columns, string? filter, bool? centroid) =>
             {
-                var bytes = await geoQuery.GetGeoBufferAsync(connectionString, table, geomColumn, schema ?? "public", columns.SpliteByComma(), filter, centroid ?? false);
+                var bytes = await geoQuery.GetGeoBufferAsync(options.Value.ConnectionString, table, geomColumn, schema ?? "public", columns.SpliteByComma(), filter, centroid ?? false);
                 return Results.Bytes(bytes, "application/x-protobuf");
             };
     }
@@ -61,18 +61,18 @@ public class GeobufRouteHandlerOption : GeoQueryRouteHandlerOption
 
 public class GeoJsonRouteHandlerOption : GeoQueryRouteHandlerOption
 {
-    public override Delegate GetRouteDelegate(string connectionString, bool isConnectionStringTemplate)
+    public override Delegate GetRouteDelegate(bool isConnectionStringTemplate)
     {
         return isConnectionStringTemplate ?
-            async ([FromServices] IGeoQuery geoQuery, string database, string table, string geomColumn, string? schema, string? idColumn, string? columns, string? filter, bool? centroid) =>
+            async ([FromServices] IOptions<GeoQueryOptions> options, [FromServices] IGeoQuery geoQuery, string database, string table, string geomColumn, string? schema, string? idColumn, string? columns, string? filter, bool? centroid) =>
             {
-                var geoJson = await geoQuery.GetGeoJsonAsync(connectionString.Format(database), table, geomColumn, schema ?? "public", idColumn, columns.SpliteByComma(), filter, centroid ?? false);
+                var geoJson = await geoQuery.GetGeoJsonAsync(options.Value.ConnectionString.Format(database), table, geomColumn, schema ?? "public", idColumn, columns.SpliteByComma(), filter, centroid ?? false);
                 return Results.Text(geoJson, "application/json");
             }
         :
-            async ([FromServices] IGeoQuery geoQuery, string table, string geomColumn, string? schema, string? idColumn, string? columns, string? filter, bool? centroid) =>
+            async ([FromServices] IOptions<GeoQueryOptions> options, [FromServices] IGeoQuery geoQuery, string table, string geomColumn, string? schema, string? idColumn, string? columns, string? filter, bool? centroid) =>
             {
-                var geoJson = await geoQuery.GetGeoJsonAsync(connectionString, table, geomColumn, schema ?? "public", idColumn, columns.SpliteByComma(), filter, centroid ?? false);
+                var geoJson = await geoQuery.GetGeoJsonAsync(options.Value.ConnectionString, table, geomColumn, schema ?? "public", idColumn, columns.SpliteByComma(), filter, centroid ?? false);
                 return Results.Text(geoJson, "application/json");
             };
     }
@@ -83,7 +83,7 @@ public class GeoJsonRouteHandlerOption : GeoQueryRouteHandlerOption
     }
 }
 
-public class GeoQueryOptions
+public class GeoQueryRouteOptions
 {
     public string Prefix = "geo";
     public bool IsConnectionStringTemplate = true;
@@ -98,12 +98,9 @@ public class GeoQueryOptions
 public static class WebAppExtensions
 {
     public static WebApplication UseGeoQuery(this WebApplication app,
-        string connectionString,
-        Action<GeoQueryOptions>? optionsBuilder = null)
+        Action<GeoQueryRouteOptions>? optionsBuilder = null)
     {
-        connectionString.ThrowIfNullOrWhiteSpace(nameof(connectionString));
-
-        var options = new GeoQueryOptions();
+        var options = new GeoQueryRouteOptions();
         optionsBuilder?.Invoke(options);
 
         var properties = options.GetType().GetProperties()
@@ -116,7 +113,7 @@ public static class WebAppExtensions
             {
                 var routeHandler = app.MapGet(
                     routeHandlerOption.GetRoutePatter(options.Prefix, options.IsConnectionStringTemplate),
-                    routeHandlerOption.GetRouteDelegate(connectionString, options.IsConnectionStringTemplate));
+                    routeHandlerOption.GetRouteDelegate(options.IsConnectionStringTemplate));
 
                 routeHandlerOption.RouteHandlerBuilderAction?.Invoke(routeHandler);
             }
