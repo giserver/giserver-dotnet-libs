@@ -26,7 +26,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{463D8BDD-641
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{21081424-D5F5-4371-B902-5E6100AF8B0E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Giserver.GeoQuery", "test\Giserver.GeoQuery\Giserver.GeoQuery.csproj", "{1B5A0609-1366-4C33-BBFA-B472813ED004}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest.Giserver.GeoQuery", "test\Giserver.GeoQuery\UnitTest.Giserver.GeoQuery.csproj", "{1B5A0609-1366-4C33-BBFA-B472813ED004}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9BA32C74-7B25-4DE2-AEDF-8A4C5970807A}"
 	ProjectSection(SolutionItems) = preProject

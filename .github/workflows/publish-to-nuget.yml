@@ -17,8 +17,8 @@ jobs:
           dotnet-version: 8.x
           include-prerelease: true
 
-      # - name: Run Tests
-      #   run: dotnet test giserver.sln --configuration Release --verbosity minimal
+      - name: Run Tests
+        run: dotnet test giserver.sln --configuration Release --verbosity minimal
 
       - name: Make Nuget Packages
         run: dotnet build -c Release
