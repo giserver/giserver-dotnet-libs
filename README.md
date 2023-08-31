@@ -19,9 +19,12 @@ you can also use libs from nuget, make your geography dev quickly
 use `postgis` query geo-format data
 
 ``` csharp
-builder.Services.AddGeoQuery();
+services.AddGeoQuery(options =>
+{
+    options.ConnectionString = configuration.GetConnectionString("geo_query")!;
+});
 
-app.UseGeoQuery(app.Configuration.GetConnectionString("Template"), options =>
+app.UseGeoQuery(options =>
 {
     options.Prefix = "api/geo";
     options.IsConnectionStringTemplate = false;
