@@ -16,6 +16,8 @@ services.AddGeoQuery(options =>
     options.ConnectionString = configuration.GetConnectionString("geo_query")!;
 });
 
+services.AddCors();
+
 services.AddEndpointsApiExplorer();
 
 if (isDev)
@@ -30,6 +32,11 @@ var app = builder.Build();
 
 if (isDev)
 {
+    app.UseCors(b =>
+    {
+        b.SetIsOriginAllowed(_ => true).AllowAnyHeader().AllowAnyMethod();
+    });
+
     app.UseSwagger();
     app.UseSwaggerUI();
 }
