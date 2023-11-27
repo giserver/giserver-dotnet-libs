@@ -83,6 +83,7 @@ internal class GeoMarkManager<T> : IGeoMarkerManager where T : DbContext
             entity.Name = marker.Name;
             entity.Geom = marker.Geom;
             entity.Style = marker.Style;
+            entity.Props = marker.Props;
             await dbContext.SaveChangesAsync();
         }
 

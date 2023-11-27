@@ -32,13 +32,24 @@ var app = builder.Build();
 
 if (isDev)
 {
-    app.UseCors(b =>
+    app.UseCors(c =>
     {
-        b.SetIsOriginAllowed(_ => true).AllowAnyHeader().AllowAnyMethod();
+        c.SetIsOriginAllowed(_ => true)
+         .AllowAnyHeader()
+         .AllowAnyMethod();
     });
 
     app.UseSwagger();
     app.UseSwaggerUI();
+}
+else
+{
+    app.UseCors(c =>
+    {
+        c.SetIsOriginAllowed(x => x.StartsWith("http://localhost"))
+         .AllowAnyHeader()
+         .AllowAnyMethod();
+    });
 }
 
 app.UseGeoMarker(options =>
