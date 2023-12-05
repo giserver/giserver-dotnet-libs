@@ -18,10 +18,9 @@ services.AddGeoQuery(options =>
 
 services.AddCors();
 
-services.AddEndpointsApiExplorer();
-
 if (isDev)
 {
+    services.AddEndpointsApiExplorer();
     services.AddSwaggerGen(o =>
     {
         o.AddGeometry(GeoSerializeType.Geojson);
