@@ -1,22 +1,23 @@
-# giserver [ÖÐÎÄ](./README.ZH.md)
+# giserver [ä¸­æ–‡](./README.ZH.md)
 
-Ìá¹©ÁËÒ»Ð©³£ÓÃµÄwebgis api
-* marker ´æ´¢
-* Í¨¹ýpostgis¶Ô `mvt` `geobuf` `geojson` Êý¾Ý½øÐÐ²éÑ¯
-* Ö§³ÖswaggerÖÐgeojson»òÕßwktÐòÁÐ»¯
+æä¾›äº†ä¸€äº›å¸¸ç”¨çš„ webgis api
 
+- marker å­˜å‚¨
+- é€šè¿‡ postgis å¯¹ `mvt` `geobuf` `geojson` æ•°æ®è¿›è¡ŒæŸ¥è¯¢
+- æ”¯æŒ swagger ä¸­ geojson æˆ–è€… wkt åºåˆ—åŒ–
 
 ## Packages
-| Package | Nuget | Downloads |
-|-|-|-|
-|[Giserver.GeoQuery](https://www.nuget.org/packages/Giserver.GeoQuery) | [![Nuget](https://img.shields.io/nuget/v/Giserver.GeoQuery)](https://www.nuget.org/packages/Giserver.GeoQuery) | ![Nuget](https://img.shields.io/nuget/dt/Giserver.GeoQuery)
-|[Giserver.Mark.EFCore](https://www.nuget.org/packages/Giserver.Mark.EFCore) | [![Nuget](https://img.shields.io/nuget/v/Giserver.Mark.EFCore)](https://www.nuget.org/packages/Giserver.Mark.EFCore) | ![Nuget](https://img.shields.io/nuget/dt/Giserver.Mark.EFCore)
-|[Giserver.NetTopologySuite.Swagger.NSwag](https://www.nuget.org/packages/Giserver.NetTopologySuite.Swagger.NSwag) | [![Nuget](https://img.shields.io/nuget/v/Giserver.NetTopologySuite.Swagger.NSwag)](https://www.nuget.org/packages/Giserver.NetTopologySuite.Swagger.NSwag) | ![Nuget](https://img.shields.io/nuget/dt/Giserver.NetTopologySuite.Swagger.NSwag)
-|[Giserver.NetTopologySuite.Swagger.Swashbuckle](https://www.nuget.org/packages/Giserver.NetTopologySuite.Swagger.Swashbuckle) | [![Nuget](https://img.shields.io/nuget/v/Giserver.NetTopologySuite.Swagger.Swashbuckle)](https://www.nuget.org/packages/Giserver.NetTopologySuite.Swagger.Swashbuckle) | ![Nuget](https://img.shields.io/nuget/dt/Giserver.NetTopologySuite.Swagger.Swashbuckle)
+
+| Package                                                                                                                       | Nuget                                                                                                                                                                  | Downloads                                                                               |
+| ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| [Giserver.GeoQuery](https://www.nuget.org/packages/Giserver.GeoQuery)                                                         | [![Nuget](https://img.shields.io/nuget/v/Giserver.GeoQuery)](https://www.nuget.org/packages/Giserver.GeoQuery)                                                         | ![Nuget](https://img.shields.io/nuget/dt/Giserver.GeoQuery)                             |
+| [Giserver.Mark.EFCore](https://www.nuget.org/packages/Giserver.Mark.EFCore)                                                   | [![Nuget](https://img.shields.io/nuget/v/Giserver.Mark.EFCore)](https://www.nuget.org/packages/Giserver.Mark.EFCore)                                                   | ![Nuget](https://img.shields.io/nuget/dt/Giserver.Mark.EFCore)                          |
+| [Giserver.NetTopologySuite.Swagger.NSwag](https://www.nuget.org/packages/Giserver.NetTopologySuite.Swagger.NSwag)             | [![Nuget](https://img.shields.io/nuget/v/Giserver.NetTopologySuite.Swagger.NSwag)](https://www.nuget.org/packages/Giserver.NetTopologySuite.Swagger.NSwag)             | ![Nuget](https://img.shields.io/nuget/dt/Giserver.NetTopologySuite.Swagger.NSwag)       |
+| [Giserver.NetTopologySuite.Swagger.Swashbuckle](https://www.nuget.org/packages/Giserver.NetTopologySuite.Swagger.Swashbuckle) | [![Nuget](https://img.shields.io/nuget/v/Giserver.NetTopologySuite.Swagger.Swashbuckle)](https://www.nuget.org/packages/Giserver.NetTopologySuite.Swagger.Swashbuckle) | ![Nuget](https://img.shields.io/nuget/dt/Giserver.NetTopologySuite.Swagger.Swashbuckle) |
 
 #### Giserver.GeoQuery
 
-``` csharp
+```csharp
 services.AddGeoQuery(options =>
 {
     options.ConnectionString = configuration.GetConnectionString("geo_query")!;
@@ -31,17 +32,19 @@ app.UseGeoQuery(options =>
 ```
 
 #### Giserver.Mark.EFCore
-``` csharp
+
+```csharp
 services.AddGeoMarker(configuration.GetConnectionString("geo_marker")!);
 
 app.UseGeoMarker(options =>
 {
-   
+
 });
 ```
 
 #### Giserver.NetTopologySuite.Swagger.NSwag
-``` csharp
+
+```csharp
 builder.Services.AddSwaggerDocument(settings =>
 {
     settings.TypeMappers.AddGeometry(GeoSerializeType.Geojson);
@@ -49,7 +52,8 @@ builder.Services.AddSwaggerDocument(settings =>
 ```
 
 #### Giserver.NetTopologySuite.Swagger.Swashbuckle
-``` csharp
+
+```csharp
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddGeometry(GeoSerializeType.Geojson);
