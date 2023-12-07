@@ -41,7 +41,7 @@ internal class GeoQuery : IGeoQuery
 
         var tableString = GetPgSqlTableString(schema, table);
         var geomColumnString = GetPgSqlGeomColumnString(geomColumn, centroid);
-        var idColumnString = idColumn != null ? $",{idColumn} as id" : "";
+        var idColumnString = idColumn != null ? $",{GetPgSqlColumnString(idColumn)} as id" : "";
         var columnsString = GetPgSqlColumnsString(columns) ?? "";
         var filterString = filter != null ? $"WHERE {filter}" : "";
 
@@ -87,12 +87,13 @@ internal class GeoQuery : IGeoQuery
 
     private static string GetPgSqlTableString(string schema, string table)
     {
-        return $"\"{schema}\".\"{table}\"";
+        return $"{GetPgSqlColumnString(schema)}.{GetPgSqlColumnString(table)}";
     }
 
     private static string GetPgSqlGeomColumnString(string geomColumn, bool centroid)
     {
-        return centroid ? $"ST_Centroid(\"{geomColumn}\")" : $"\"{geomColumn}\"";
+        var colString = GetPgSqlColumnString(geomColumn);
+        return centroid ? $"ST_Centroid({colString})" : $"{colString}";
     }
 
     private static string? GetPgSqlColumnsString(string[]? columns)
@@ -100,7 +101,12 @@ internal class GeoQuery : IGeoQuery
         if (columns == null || columns.Length == 0)
             return null;
 
-        return string.Join(',', columns.Select(x => $"\"{x}\""));
+        return string.Join(',', columns.Select(x => GetPgSqlColumnString(x)));
+    }
+
+    private static string GetPgSqlColumnString(string column)
+    {
+        return $"\"{column}\"";
     }
 
     private static async Task<T> QuerySingleValueAsync<T>(string connectionString, string sql, Array? parameters = null)
