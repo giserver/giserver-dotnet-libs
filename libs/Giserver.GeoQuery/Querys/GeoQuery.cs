@@ -76,9 +76,9 @@ internal class GeoQuery : IGeoQuery
 
         var sql = $"""
             WITH mvt_geom as (
-                 SELECT ST_AsMVTGeom (ST_Transform({geomColumnString}, 3857),ST_TileEnvelope({z}, {x}, {y})) as geom {columnsString}
-                 FROM {tableString},(SELECT ST_SRID("{geomColumn}") AS srid FROM {tableString} LIMIT 1) a
-                 WHERE ST_Intersects("{geomColumn}",ST_Transform(ST_TileEnvelope({z}, {x}, {y}),srid)) {filterString})
+                 SELECT ST_AsMVTGeom(ST_Transform({geomColumnString}, 3857),ST_TileEnvelope({z}, {x}, {y})) as geom {columnsString}
+                 FROM {tableString},(SELECT ST_SRID({geomColumnString}) AS srid FROM {tableString} LIMIT 1) a
+                 WHERE ST_Intersects({geomColumnString},ST_Transform(ST_TileEnvelope({z}, {x}, {y}),srid)) {filterString})
             SELECT ST_AsMVT(mvt_geom.*, '{table}', 4096, 'geom') AS mvt from mvt_geom;
             """;
 
