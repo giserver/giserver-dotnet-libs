@@ -43,6 +43,8 @@ internal class GeoQuery : IGeoQuery
         var geomColumnString = GetPgSqlGeomColumnString(geomColumn, centroid);
         var idColumnString = idColumn != null ? $",{GetPgSqlColumnString(idColumn)} as id" : "";
         var columnsString = GetPgSqlColumnsString(columns) ?? "";
+
+        var parameters = TranslateFilter(ref filter);
         var filterString = filter != null ? $"WHERE {filter}" : "";
 
         var sql = $"""
@@ -54,7 +56,7 @@ internal class GeoQuery : IGeoQuery
                        ) AS fc
             """;
 
-        return await QuerySingleValueAsync<string>(connectionString, sql);
+        return await QuerySingleValueAsync<string>(connectionString, sql, parameters);
     }
 
     public async Task<byte[]> GetMvtBufferAsync(string connectionString, string table, string geomColumn, int z, int x, int y,
@@ -107,6 +109,70 @@ internal class GeoQuery : IGeoQuery
     private static string GetPgSqlColumnString(string column)
     {
         return $"\"{column}\"";
+    }
+
+    private static Array? TranslateFilter(ref string? filter)
+    {
+        string[] filter_opration_keys = ["=", ">", "<", "<>", ">=", "<=", "LIKE"];
+
+        if (filter is not null)
+        {
+            var ret = new List<NpgsqlParameter>();
+            var ands = filter.ToUpper().Split(" AND ", StringSplitOptions.RemoveEmptyEntries);
+            filter = "";
+
+            for (var i = 0; i < ands.Length; i++)
+            {
+                var and = ands[i];
+                var ors = and.Split(" OR ");
+
+                for (var j = 0; j < ors.Length; j++)
+                {
+                    var or = ors[j];
+                    foreach (var key in filter_opration_keys)
+                    {
+                        var indexofkey = or.IndexOf(key);
+                        if (indexofkey == -1) continue;
+
+                        var col = or[..indexofkey].Trim();
+                        var value = or[(indexofkey + key.Length)..].Trim();
+
+                        filter += $"{col} {key} @{col}";
+                        
+                        if(int.TryParse(value,out var intV))
+                        {
+                            ret.Add(new NpgsqlParameter($"@{col}", intV));
+                        }
+
+                        else if(double.TryParse(value,out var doubleV))
+                        {
+                            ret.Add(new NpgsqlParameter($"@{col}", doubleV));
+                        }
+
+                        else
+                        {
+                            ret.Add(new NpgsqlParameter($"@{col}", value));
+                        }
+                    }
+
+                    if (j < ors.Length - 1)
+                    {
+                        filter += " OR ";
+                    }
+                }
+
+                if (i < ands.Length - 1)
+                {
+                    filter += " AND ";
+                }
+            }
+
+            if (ret.Count > 0)
+                return ret.ToArray();
+        }
+
+        filter = null;
+        return null;
     }
 
     private static async Task<T> QuerySingleValueAsync<T>(string connectionString, string sql, Array? parameters = null)
