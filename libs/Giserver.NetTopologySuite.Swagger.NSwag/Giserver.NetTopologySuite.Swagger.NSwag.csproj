@@ -1,24 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	  <PackageIcon>logo.png</PackageIcon>
-	  <Title>Giserver.NetTopologySuite.Swagger.NSwag</Title>
-	  <Description>netcore api swagger type examples of nettopologysuite geometry type</Description>
-  </PropertyGroup>
-	
+	<PropertyGroup>
+		<Title>Giserver.NetTopologySuite.Swagger.NSwag</Title>
+		<Description>netcore api swagger type examples of nettopologysuite geometry type</Description>
+	</PropertyGroup>
+
 	<ItemGroup>
 		<PackageReference Include="NJsonSchema" Version="10.9.0" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Giserver.NetTopologySuite\Giserver.NetTopologySuite.csproj" />
+		<ProjectReference Include="..\Giserver.NetTopologySuite\Giserver.NetTopologySuite.csproj" />
 	</ItemGroup>
-
-	<ItemGroup>
-		<None Include="..\logo.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
-	</ItemGroup>
-
 </Project>

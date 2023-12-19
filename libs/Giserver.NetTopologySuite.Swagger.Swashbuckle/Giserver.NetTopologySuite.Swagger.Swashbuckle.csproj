@@ -1,24 +1,16 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-	 <PackageIcon>logo.png</PackageIcon>
-	 <Title>Giserver.NetTopologySuite.Swagger.Swashbuckle</Title>
-	 <PackageTags>NetTopologySuite Swagger Swashbuckle</PackageTags>
-     <Description>netcore api swagger type examples of nettopologysuite geometry type</Description>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.4.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Giserver.NetTopologySuite\Giserver.NetTopologySuite.csproj" />
-  </ItemGroup>
+	<PropertyGroup>
+		<Title>Giserver.NetTopologySuite.Swagger.Swashbuckle</Title>
+		<PackageTags>NetTopologySuite Swagger Swashbuckle</PackageTags>
+		<Description>netcore api swagger type examples of nettopologysuite geometry type</Description>
+	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="..\logo.png">
-			<Pack>True</Pack>
-			<PackagePath>\</PackagePath>
-		</None>
+		<PackageReference Include="Swashbuckle.AspNetCore.SwaggerGen" Version="6.4.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Giserver.NetTopologySuite\Giserver.NetTopologySuite.csproj" />
 	</ItemGroup>
 </Project>

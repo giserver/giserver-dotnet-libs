@@ -1,8 +1,6 @@
 <Project>
 	<PropertyGroup>
-
 		<Version>1.0.1-beta</Version>
-
 		<TargetFrameworks>net6.0;net7.0;net8.0</TargetFrameworks>
 		<LangVersion>latest</LangVersion>
 		<Nullable>enable</Nullable>
@@ -11,6 +9,7 @@
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
 		<GenerateDocumentationFile>true</GenerateDocumentationFile>
 
+		<PackageIcon>logo.png</PackageIcon>
 		<Authors>CocaineCoder</Authors>
 		<RepositoryType>git</RepositoryType>
 		<RepositoryUrl>https://github.com/giserver/giserver.git</RepositoryUrl>
@@ -22,4 +21,11 @@
 	<PropertyGroup>
 		<NoWarn>1701;1702;1591</NoWarn>
 	</PropertyGroup>
+
+	<ItemGroup>
+		<None Include="..\logo.png">
+			<Pack>True</Pack>
+			<PackagePath>\</PackagePath>
+		</None>
+	</ItemGroup>
 </Project>
