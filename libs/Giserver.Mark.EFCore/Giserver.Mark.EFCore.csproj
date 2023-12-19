@@ -13,6 +13,6 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" Version="7.0.4" />
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL.NetTopologySuite" Version="8.0.0" />
 	</ItemGroup>
 </Project>
