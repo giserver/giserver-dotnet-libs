@@ -1,11 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-	  <Title>giserver cad wrapper</Title>
+	  <Title>giserver gdal wrapper</Title>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ACadSharp" Version="2.0.1-beta" />
+    <PackageReference Include="MaxRev.Gdal.Core" Version="3.7.0.217" />
   </ItemGroup>
 
 </Project>
