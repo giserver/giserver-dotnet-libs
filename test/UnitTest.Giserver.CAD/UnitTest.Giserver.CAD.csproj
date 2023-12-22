@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\libs\Giserver.CAD\Giserver.CAD.csproj" />
+    <ProjectReference Include="..\XUnitExtensions\XUnitExtensions.csproj" />
   </ItemGroup>
 
   <ItemGroup>

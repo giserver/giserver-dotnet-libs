@@ -1,7 +1,6 @@
-﻿using System.IO;
+﻿namespace UnitTest.Giserver.CAD;
 
-namespace UnitTest.Giserver.CAD;
-
+[TestCaseOrderer("XUnitExtensions.Order.Priority.PriorityOrderer", "XUnitExtensions")]
 public class CadFileFormatConvertTest
 {
     private readonly string dwgFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "data", "1.dwg");
@@ -13,7 +12,7 @@ public class CadFileFormatConvertTest
             File.Delete(dxfFile);
     }
 
-    [Fact]
+    [Fact, TestPriority(0)]
     public async Task DwgFileToDxfFile()
     {
         await new ACADConverter().DwgToDxfAsync(dwgFile, dxfFile);
@@ -21,7 +20,7 @@ public class CadFileFormatConvertTest
         Assert.True(File.Exists(dxfFile));
     }
 
-    [Fact]
+    [Fact, TestPriority(1)]
     public async Task DwgFileToDxfStream()
     {
         using var stream = new FileStream(dxfFile, FileMode.Create, FileAccess.Write);
@@ -32,7 +31,7 @@ public class CadFileFormatConvertTest
         Assert.True(new FileInfo(dxfFile).Length > 0);
     }
 
-    [Fact]
+    [Fact, TestPriority(2)]
     public async Task DwgStreamToDxfFile()
     {
         using var stream = new FileStream(dwgFile, FileMode.Open, FileAccess.Read);
@@ -42,7 +41,7 @@ public class CadFileFormatConvertTest
         Assert.True(File.Exists(dxfFile));
     }
 
-    [Fact]
+    [Fact, TestPriority(3)]
     public async Task DwgStreamToDxfStream()
     {
         using var dwgStream = new FileStream(dwgFile, FileMode.Open, FileAccess.Read);

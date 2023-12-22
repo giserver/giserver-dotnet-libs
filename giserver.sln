@@ -38,6 +38,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest.Giserver.CAD", "te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest.Giserver.GeoQuery", "test\UnitTest.Giserver.GeoQuery\UnitTest.Giserver.GeoQuery.csproj", "{ED1CD225-E24A-4D28-A9E3-15F8830AFF76}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XUnitExtensions", "test\XUnitExtensions\XUnitExtensions.csproj", "{94A63EEB-C40F-4B62-B995-DFD4DB14C9A8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -84,6 +86,10 @@ Global
 		{ED1CD225-E24A-4D28-A9E3-15F8830AFF76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ED1CD225-E24A-4D28-A9E3-15F8830AFF76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ED1CD225-E24A-4D28-A9E3-15F8830AFF76}.Release|Any CPU.Build.0 = Release|Any CPU
+		{94A63EEB-C40F-4B62-B995-DFD4DB14C9A8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{94A63EEB-C40F-4B62-B995-DFD4DB14C9A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{94A63EEB-C40F-4B62-B995-DFD4DB14C9A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{94A63EEB-C40F-4B62-B995-DFD4DB14C9A8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +105,7 @@ Global
 		{22A291BF-BF41-4FCE-9AC3-8CE120E51E9A} = {BF7B1805-A57C-4F1D-9D22-7861EF80637E}
 		{477DFB60-30F1-4DCC-AD4B-5E215AAE85D7} = {21081424-D5F5-4371-B902-5E6100AF8B0E}
 		{ED1CD225-E24A-4D28-A9E3-15F8830AFF76} = {21081424-D5F5-4371-B902-5E6100AF8B0E}
+		{94A63EEB-C40F-4B62-B995-DFD4DB14C9A8} = {21081424-D5F5-4371-B902-5E6100AF8B0E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {30B4E792-0A3D-4DCD-B6CF-1BB113ADA882}
