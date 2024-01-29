@@ -4,6 +4,7 @@ using Giserver.NetTopologySuite.Serialize;
 using Giserver.NetTopologySuite.Swagger.Swashbuckle;
 
 var builder = WebApplication.CreateSlimBuilder(args);
+builder.Logging.ClearProviders();
 var services = builder.Services;
 var configuration = builder.Configuration;
 var isDev = builder.Environment.IsDevelopment();
